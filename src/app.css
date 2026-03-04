@@ -1,0 +1,119 @@
+/* src/app.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  /* --- Mint Green Theme (Light) --- */
+  --primary-bg: #f4fbf7;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-shadow: 0 8px 32px 0 rgba(32, 96, 61, 0.1);
+  
+  --brand-green: #20603D;
+  --brand-green-hover: #16432a;
+  --brand-light: #e9f5ee;
+  
+  --color-text-main: #1a2a20;
+  --color-text-muted: #5c7066;
+  
+  --blob-color-1: #d1e7dd;
+  --blob-color-2: #e9f5ee;
+  
+  --radius-bubbly: 30px;
+}
+
+[data-bs-theme="dark"] {
+  /* --- Mint Green Theme (Dark) --- */
+  --primary-bg: #0b130e;
+  --glass-bg: rgba(20, 30, 25, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  
+  --brand-green: #34a867; /* Lighter mint for contrast */
+  --brand-green-hover: #45c47c;
+  
+  --color-text-main: #f1f8f4;
+  --color-text-muted: #a3b8ad;
+  
+  --blob-color-1: #1a2e23;
+  --blob-color-2: #0d1a13;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  transition: background-color 0.5s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* --- Animated Background Blobs --- */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.6;
+  animation: floatBlob 25s infinite alternate ease-in-out;
+}
+
+body::before {
+  background: var(--blob-color-1);
+  top: -10%;
+  left: -10%;
+}
+
+body::after {
+  background: var(--blob-color-2);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -12s;
+}
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(100px, 50px) scale(1.2); }
+}
+
+/* --- Glassmorphism Core --- */
+.glass {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  border-radius: var(--radius-bubbly);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* --- Bubbly Elements --- */
+.btn {
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.form-control {
+  background: var(--glass-bg);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  color: var(--color-text-main);
+}
+
+.form-control:focus {
+  background: var(--glass-bg);
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 0.25rem rgba(32, 96, 61, 0.15);
+  color: var(--color-text-main);
+}
